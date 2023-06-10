@@ -27,21 +27,37 @@
         <div class="parentdivContactsession">
             <div class="formTagDiv">
                 <form class="formTag">
+                    <!-- full name -->
+
                     <div>
                         <label for="fullname" class="inputTagname">Full Name:</label><br>
-                        <input class="inputFullname" type="text" placeholder="Full Name" name="fullname">
+                        <input class="inputFullname" type="text" placeholder="Full Name" name="fullname" id="inputName"
+                            onfocusout="validateName()"><br>
+                        <span class="validateNameError" style="color:  rgb(207, 55, 55);font-size: 20px;font-weight: 600;"></span>
                     </div>
+                    <!-- email -->
                     <div>
                         <label for="email" class="inputTagname">Email</label><br>
-                        <input type="email" placeholder="email" name="email">
+                        <input type="email" placeholder="email" name="email" id="inputEmail"
+                            onfocusout="validateEmail()"><br>
+                        <span class="validateEmailError" style="color: rgb(207, 55, 55);font-size: 20px;font-weight: 600;"></span>
                     </div>
+                    <!-- mobile -->
+                    <div>
+                        <label for="mob" class="inputTagname">Mobile</label><br>
+                        <input type="tel" pattern="[0-9]{10}" placeholder="Mobile Number" name="mob" id="inputmob"
+                            onfocusout="validateMobile()"><br>
+                        <span class="validateMobileError" style="color: rgb(207, 55, 55);font-size: 20px;font-weight: 600;"></span>
+                    </div>
+                    <!-- message -->
                     <div>
                         <label for="text" class="inputTagname">Message</label><br>
-                        <textarea cols="30" rows="3" placeholder="Message"></textarea>
-
+                        <textarea cols="30" rows="3" placeholder="Message" id="inputMessage"
+                            onfocusout="validateMessage()"></textarea><br>
+                        <span class="validateMessageError" style="color: rgb(207, 55, 55);font-size: 20px;font-weight: 600;"></span>
                     </div>
                     <div class="divButton">
-                        <button class="button">Submit</button>
+                        <button class="button" type="button">Submit</button>
 
                     </div>
                 </form>
@@ -56,16 +72,16 @@
         <div class="detailsAdmin">
             <div class="DetailsofWebsite">
                 <div class="headingAdmindetails"><i class="fa-solid fa-location-dot"></i> Address:</div>
-               <div class="ii">
-                <p >Gold Tower</p>
-                <p>Kakkanad</p>
-                <p>Wayanad</p>
-               </div>
-               
+                <div class="ii">
+                    <p>Gold Tower</p>
+                    <p>Kakkanad</p>
+                    <p>Wayanad</p>
+                </div>
+
             </div>
             <div class="DetailsofWebsite">
                 <h3 class="headingAdmindetails"><i class="fa-solid fa-phone"></i>Phone:</h3>
-                <div  class="ii">7306946106</div>
+                <div class="ii">7306946106</div>
             </div>
             <div class="DetailsofWebsite">
                 <h3><i class="fa-solid fa-envelope"></i>Email:</h3>
@@ -78,5 +94,81 @@
         </div>
     </div>
 </body>
+<script>
+    // JavaScript
+    // email-validation
+    function validateEmail() {
+        const inputEmail = document.getElementById("inputEmail");
+        const errorSpan = document.querySelector(".validateEmailError");
+        const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (inputEmail.value.trim() === "") {
+            errorSpan.textContent = "Email address is required.";
+        } else if (!emailpattern.test(inputEmail.value.trim()))
+        //   The test method is used to test if a string matches a regular expression. It returns true if the pattern is found in the string, and false otherwise.
+        {
+            errorSpan.textContent = "Invalid email address.";
+        } else {
+            errorSpan.textContent = "";
+        }
+    }
+
+    // mobile validation
+    function validateMobile() {
+        const inputMob = document.getElementById("inputmob")
+        const validateMobileError = document.getElementsByClassName("validateMobileError")[0]
+        if (inputMob.value.trim() === "") {
+            validateMobileError.textContent = "Mobile Number is required"
+        }
+        else if (!inputMob.checkValidity())
+        // It also uses the checkValidity() method to verify if the entered value matches the specified pattern ([0-9]{10}) for a 10-digit mobile number.
+        {
+            validateMobileError.textContent = "Invalid mobile number.";
+        } else {
+            validateMobileError.textContent = "";
+        }
+    }
+    // message validation
+    function validateMessage() {
+        const inputMessage = document.getElementById('inputMessage')
+        const validateMessageError = document.getElementsByClassName('validateMessageError')[0]
+        if (inputMessage.value.trim() === "") {
+            validateMessageError.textContent = "Message is required."
+        }
+        else {
+            validateMessageError.textContent = ""
+
+        }
+    }
+    // name validation
+    function validateName() {
+
+        const inputName = document.getElementById('inputName')
+        const validateNameError = document.getElementsByClassName('validateNameError')[0]
+        if (inputName.value.trim() === "") {
+            validateNameError.textContent = "Message is required."
+        }
+        else if (!/^[A-Z]/.test(inputName.value.trim())) {
+            validateNameError.textContent = "First letter should be capital letter"
+
+        }
+        else {
+            validateNameError.textContent = ""
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+</script>
 
 </html>
